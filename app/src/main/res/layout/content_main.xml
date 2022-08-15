@@ -20,6 +20,7 @@
         app:navGraph="@navigation/nav_graph" />
 
     <cls.android.button.Button
+        android:id="@+id/button"
         android:layout_margin="@dimen/margin_regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

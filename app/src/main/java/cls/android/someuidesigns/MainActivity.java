@@ -13,15 +13,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import cls.android.button.Button;
 import cls.android.someuidesigns.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,26 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        button = findViewById(R.id.button);
+        button.setOnSwipeListener(new Button.OnStateChangedListener() {
+            @Override
+            public void onChange(int i) {
+                if (i == Button.START){
+                    Toast.makeText(MainActivity.this, "Start", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "End", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Click", Toast.LENGTH_SHORT).show();
+            }
+        });
+        button.isVibrationEnabled(true);
     }
 
     @Override

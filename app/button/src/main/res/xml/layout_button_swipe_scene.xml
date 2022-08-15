@@ -21,6 +21,7 @@
         <Constraint android:id="@+id/constraint_swipe_inner_btn"
             motion:layout_constraintStart_toStartOf="@+id/view"
             motion:layout_constraintTop_toTopOf="@+id/view"
+            android:rotation="0"
             motion:layout_constraintBottom_toBottomOf="@+id/view"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -61,6 +62,7 @@
             motion:layout_constraintBottom_toBottomOf="@+id/view"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:rotation="180"
             android:layout_marginEnd="@dimen/margin_large"
 
             />

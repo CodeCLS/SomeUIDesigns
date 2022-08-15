@@ -2,6 +2,7 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/motionlayout"
     android:layout_height="@dimen/btn_height_swipe"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     layoutDescription="@xml/layout_button_swipe_scene"
