@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,13 @@ public class Button extends FrameLayout {
     private OnStateChangedListener onSwipeListener;
 
     private MotionLayout motionLayout;
+    private TextView textOneView;
+    private TextView textTwoView;
+
+    private String textOne = "Placeholder I";
+    private String textTwo = "Placeholder II";
     private boolean isVibrationEnabled = false;
+
 
     public Button(@NonNull Context context) {
         super(context);
@@ -42,7 +49,13 @@ public class Button extends FrameLayout {
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.layout_button_swipe,this);
         initViews();
+        setupViews();
+    }
+
+    private void setupViews() {
         initListener();
+        textOneView.setText(textOne);
+        textTwoView.setText(textTwo);
     }
 
     private void initListener() {
@@ -80,6 +93,8 @@ public class Button extends FrameLayout {
 
     private void initViews() {
         motionLayout = findViewById(R.id.motionlayout);
+        textOneView = findViewById(R.id.text);
+        textTwoView = findViewById(R.id.text2);
     }
 
     public void setOnSwipeListener(OnStateChangedListener onSwipeListener){
@@ -93,5 +108,27 @@ public class Button extends FrameLayout {
     public interface OnStateChangedListener{
         void onChange(int i);
 
+    }
+
+    public String getTextOne() {
+        return textOne;
+    }
+
+    public void setTextOne(String textOne) {
+        this.textOne = textOne;
+        postInvalidate();
+
+        setupViews();
+    }
+
+    public String getTextTwo() {
+        return textTwo;
+    }
+
+    public void setTextTwo(String textTwo) {
+        this.textTwo = textTwo;
+        postInvalidate();
+
+        setupViews();
     }
 }

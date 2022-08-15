@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         button.isVibrationEnabled(true);
+        button.setTextOne("First State");
+        button.setTextTwo("Second State");
     }
 
     @Override
