@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_regular">4dp</dimen>
+    <dimen name="btn_height_swipe">68dp</dimen>
+    <dimen name="corner_radius_btn_swipe">20dp</dimen>
+    <dimen name="margin_large">8dp</dimen>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black_btn">#505050</color>
+    <color name="white_btn">#EDEDED</color>
+    <color name="white_original">#FFFFFF</color>
+    <color name="black_original">#000000</color>
+</resources>
