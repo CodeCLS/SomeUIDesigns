@@ -1,7 +1,7 @@
 # SomeUIDesigns
 Simple Swipe Button. Inspired by ClayEditor Button
 
-
+```groovy
 allprojects {
 		repositories {
 			...
@@ -12,3 +12,5 @@ allprojects {
   dependencies {
 	        implementation 'com.github.CodeCLS:SomeUIDesigns:1.0.0'
 	}
+
+```
