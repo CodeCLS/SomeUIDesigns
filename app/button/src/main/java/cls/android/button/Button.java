@@ -1,10 +1,12 @@
 package cls.android.button;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,9 +22,11 @@ public class Button extends FrameLayout {
     private MotionLayout motionLayout;
     private TextView textOneView;
     private TextView textTwoView;
+    private ImageView imageView;
 
     private String textOne = "Placeholder I";
     private String textTwo = "Placeholder II";
+    private Drawable img;
     private boolean isVibrationEnabled = false;
 
 
@@ -56,6 +60,8 @@ public class Button extends FrameLayout {
         initListener();
         textOneView.setText(textOne);
         textTwoView.setText(textTwo);
+        if (img != null)
+            imageView.setImageDrawable(img);
     }
 
     private void initListener() {
@@ -95,6 +101,7 @@ public class Button extends FrameLayout {
         motionLayout = findViewById(R.id.motionlayout);
         textOneView = findViewById(R.id.text);
         textTwoView = findViewById(R.id.text2);
+        imageView = findViewById(R.id.image);
     }
 
     public void setOnSwipeListener(OnStateChangedListener onSwipeListener){
@@ -116,9 +123,10 @@ public class Button extends FrameLayout {
 
     public void setTextOne(String textOne) {
         this.textOne = textOne;
-        postInvalidate();
 
         setupViews();
+        postInvalidate();
+
     }
 
     public String getTextTwo() {
@@ -127,8 +135,20 @@ public class Button extends FrameLayout {
 
     public void setTextTwo(String textTwo) {
         this.textTwo = textTwo;
-        postInvalidate();
 
         setupViews();
+        postInvalidate();
+
+    }
+
+    public Drawable getImg() {
+        return img;
+    }
+
+    public void setImg(Drawable img) {
+        this.img = img;
+        imageView.setImageDrawable(img);
+        postInvalidate();
+
     }
 }
