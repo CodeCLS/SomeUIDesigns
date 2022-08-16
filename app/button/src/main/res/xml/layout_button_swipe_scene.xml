@@ -37,7 +37,7 @@
         <Constraint android:id="@+id/text2">
             <CustomAttribute
                 motion:attributeName="alpha"
-                motion:customFloatValue="0.0"
+                motion:customFloatValue="1.0"
                 />
         </Constraint>
     </ConstraintSet>
@@ -69,7 +69,7 @@
         <Constraint android:id="@+id/text">
             <CustomAttribute
                 motion:attributeName="alpha"
-                motion:customFloatValue="0.0"
+                motion:customFloatValue="1.0"
                 />
         </Constraint>
         <Constraint android:id="@+id/text2">
@@ -89,5 +89,10 @@
             motion:touchAnchorId="@+id/constraint_swipe_inner_btn"
             motion:touchAnchorSide="right"
             motion:dragDirection="dragRight" />
+
+
+
     </Transition>
+
+
 </MotionScene>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Button extends FrameLayout {
     public static final int START = 0;
@@ -23,11 +24,15 @@ public class Button extends FrameLayout {
     private TextView textOneView;
     private TextView textTwoView;
     private ImageView imageView;
+    private ConstraintLayout btnInsideParent;
+    private View background;
 
     private String textOne = "Placeholder I";
     private String textTwo = "Placeholder II";
     private Drawable img;
     private boolean isVibrationEnabled = false;
+    private MotionLayout.TransitionListener transitionListener;
+    private ButtonTextAnimator buttonTextAnimator;
 
 
     public Button(@NonNull Context context) {
@@ -54,6 +59,12 @@ public class Button extends FrameLayout {
         LayoutInflater.from(getContext()).inflate(R.layout.layout_button_swipe,this);
         initViews();
         setupViews();
+        setupAnimator();
+
+    }
+
+    private void setupAnimator() {
+        buttonTextAnimator = new ButtonTextAnimator(this);
     }
 
     private void setupViews() {
@@ -65,7 +76,10 @@ public class Button extends FrameLayout {
     }
 
     private void initListener() {
-        motionLayout.setTransitionListener(new MotionLayout.TransitionListener() {
+        transitionListener = new MotionLayout.TransitionListener() {
+            private int i1;
+            private int i;
+
             @Override
             public void onTransitionStarted(MotionLayout motionLayout, int i, int i1) {
 
@@ -73,6 +87,11 @@ public class Button extends FrameLayout {
 
             @Override
             public void onTransitionChange(MotionLayout motionLayout, int i, int i1, float v) {
+                this.i = i;
+                this.i1 = i1;
+                buttonTextAnimator.notifyTransitionChange(motionLayout,i,i1,v);
+
+
 
             }
 
@@ -80,12 +99,8 @@ public class Button extends FrameLayout {
             public void onTransitionCompleted(MotionLayout motionLayout, int i) {
                 if (isVibrationEnabled)
                     HardwareUtil.vibrate(getContext());
-                if (onSwipeListener != null)
-                    onSwipeListener
-                            .onChange(
-                                    motionLayout.getCurrentState() == motionLayout.getStartState() ?
-                                            START : END
-                            );
+                notifyStateChange(motionLayout);
+
 
             }
 
@@ -93,8 +108,18 @@ public class Button extends FrameLayout {
             public void onTransitionTrigger(MotionLayout motionLayout, int i, boolean b, float v) {
 
             }
-        });
+        };
+        motionLayout.setTransitionListener(transitionListener);
 
+    }
+
+    private void notifyStateChange(MotionLayout motionLayout) {
+        if (onSwipeListener != null)
+            onSwipeListener
+                    .onChange(
+                            motionLayout.getCurrentState() == motionLayout.getStartState() ?
+                                    START : END
+                    );
     }
 
     private void initViews() {
@@ -102,6 +127,8 @@ public class Button extends FrameLayout {
         textOneView = findViewById(R.id.text);
         textTwoView = findViewById(R.id.text2);
         imageView = findViewById(R.id.image);
+        btnInsideParent = findViewById(R.id.constraint_swipe_inner_btn);
+        background = findViewById(R.id.view);
     }
 
     public void setOnSwipeListener(OnStateChangedListener onSwipeListener){
@@ -150,5 +177,46 @@ public class Button extends FrameLayout {
         imageView.setImageDrawable(img);
         postInvalidate();
 
+    }
+
+    public MotionLayout.TransitionListener getTransitionListener() {
+        return transitionListener;
+    }
+
+    public void setTransitionListener(MotionLayout.TransitionListener transitionListener) {
+        this.transitionListener = transitionListener;
+        motionLayout.setTransitionListener(transitionListener);
+    }
+
+    public TextView getTextOneView() {
+        return textOneView;
+    }
+
+    public void setTextOneView(TextView textOneView) {
+        this.textOneView = textOneView;
+    }
+
+    public TextView getTextTwoView() {
+        return textTwoView;
+    }
+
+    public void setTextTwoView(TextView textTwoView) {
+        this.textTwoView = textTwoView;
+    }
+
+    public ConstraintLayout getBtnInsideParent() {
+        return btnInsideParent;
+    }
+
+    public void setBtnInsideParent(ConstraintLayout btnInsideParent) {
+        this.btnInsideParent = btnInsideParent;
+    }
+
+    public View getBackgroundView() {
+        return background;
+    }
+
+    public void setBackground(View background) {
+        this.background = background;
     }
 }
